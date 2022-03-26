@@ -7,7 +7,11 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="StepProject" />
+        <module name="object_class" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="object_class" target="15" />
+    </bytecodeTargetLevel>
   </component>
 </project>
