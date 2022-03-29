@@ -36,8 +36,7 @@ public class FlightServiceImpl implements FlightService {
 
     @Override
     public void showAllFlights() {
-        ResultSet resultSet = flightDao.showAllFlights();
-        ArrayList<Flight> flights = DataParser.parseFlightResultSet(resultSet);
+        ArrayList<Flight> flights = flightDao.showAllFlights();
         System.out.println("Serial           From              Destination");
         System.out.println("-------        ---------          -------------");
         for (int i = 0; i < Helper.mapToFlightDto(flights).size(); i++) {
@@ -50,8 +49,7 @@ public class FlightServiceImpl implements FlightService {
 
     @Override
     public void showFlightBySerial(String serial_number) {
-        ResultSet resultSet = flightDao.showFlightBySerial(serial_number);
-        ArrayList<Flight> flights = DataParser.parseFlightResultSet(resultSet);
+        ArrayList<Flight> flights = flightDao.showFlightBySerial(serial_number);
         Helper.printFlightsInfo(flights);
         System.out.println("--------------------------------------------------------------------------");
     }

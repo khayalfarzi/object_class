@@ -65,11 +65,11 @@ public class SqlQueries {
 
     public static String selectAllFlightsSql(){
         return "Select * from Flights where " +
-                " date = current_date + INTERVAL '1 DAY'";
+                " \"date\" >= current_date and \"date\" <= current_date + INTERVAL '1 DAY'";
     }
 
     public static String selectFlightBySerialSql(String serial_number){
-        return String.format("Select * from Flights where  \"date\" = current_date + INTERVAL '1 DAY' AND serial_number='%s'", serial_number);
+        return String.format("Select * from Flights where \"date\" >= current_date and \"date\" <= current_date + INTERVAL '1 DAY' AND serial_number='%s'", serial_number);
     }
 
     public static String selectFlightsForBookingSql(String destination, short seats, Date date){

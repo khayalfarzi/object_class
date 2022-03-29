@@ -28,16 +28,7 @@ public class BookingServiceImpl implements BookingService {
     @Override
     public int getBookingBySerialAndFin(BookingDto bookingDto) {
         Booking booking = new Booking(bookingDto.getFin_code(), bookingDto.getSerial_number());
-        int count = 0;
-        ResultSet resultSet = bookingDao.getBookingBySerialAndFin(booking);
-        try {
-            while (resultSet.next()) {
-                count = resultSet.getInt("count");
-            }
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
-        }
-        return count;
+        return bookingDao.getBookingBySerialAndFin(booking);
     }
 
     @Override

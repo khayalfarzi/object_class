@@ -30,16 +30,20 @@ public class BookingDaoImpl implements BookingDao {
     }
 
     @Override
-    public ResultSet getBookingBySerialAndFin(Booking booking) {
+    public int getBookingBySerialAndFin(Booking booking) {
         try {
             connection = SqlConnection.checkConnection(connection);
             Statement statement = connection.createStatement();
             ResultSet resultSet = statement.executeQuery(SqlQueries.selectBookingBySerialAndFinSql(booking));
+            int count  = 0;
+            while (resultSet.next()){
+                count = resultSet.getInt("count");
+            }
             connection.close();
-            return resultSet;
+            return count;
         } catch (SQLException e) {
             System.out.println(e.getMessage());
-            return null;
+            return 0;
         }
     }
 
