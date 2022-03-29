@@ -1,37 +1,35 @@
 package dao.impl;
 
-import org.junit.jupiter.api.Assertions;
+
+import model.Flight;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mock;
-import org.mockito.Mockito;
+import org.junit.jupiter.params.ParameterizedTest;
 
-import java.lang.module.ResolutionException;
-import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class FlightDaoImplTest {
-
-    @Mock
-    private ResultSet resultSet;
+    FlightDaoImpl flightDao = new FlightDaoImpl();
+    @Test
+    void selectAllFlights() throws SQLException, ParseException {
+        Flight flight1 = new Flight(3, "12LM23", "Kiev", "Baku", (short) 13,
+                new SimpleDateFormat("yyyy-MM-dd").parse("2022-03-26"));
+        Flight flight2 = new Flight(4, "89MK55", "Kiev", "Istanbul", (short) 4,
+                new SimpleDateFormat("yyyy-MM-dd").parse("2022-03-27"));
+        assertEquals(flight1, flightDao.showAllFlights().get(0));
+        assertEquals(flight2, flightDao.showAllFlights().get(1));
+    }
 
     @Test
-    void selectAllFlights() throws SQLException {
-
-        resultSet = Mockito.mock(ResultSet.class);
-
-        Mockito.when(resultSet.getInt("id")).thenReturn(1);
-        Mockito.when(resultSet.getString("serial_number")).thenReturn("25JK11");
-        Mockito.when(resultSet.getString("from")).thenReturn("Kiev");
-
-        FlightDaoImpl flightDao = new FlightDaoImpl();
-        ResultSet resultSet1 = flightDao.showAllFlights();
-
-        while (resultSet1.next()){
-            Assertions.assertEquals(1, resultSet1.getInt("id"));
-            break;
-        }
-
-
+    void showFlightBySerial() throws ParseException {
+        Flight flight1 = new Flight(3, "12LM23", "Kiev", "Baku", (short) 13,
+                new SimpleDateFormat("yyyy-MM-dd").parse("2022-03-26"));
+        Flight flight2 = new Flight(4, "89MK55", "Kiev", "Istanbul", (short) 4,
+                new SimpleDateFormat("yyyy-MM-dd").parse("2022-03-27"));
+        assertEquals(flight1, flightDao.showFlightBySerial("12LM23").get(0));
+        assertEquals(flight2, flightDao.showFlightBySerial("89MK55").get(0));
     }
 }

@@ -59,7 +59,7 @@ public class Application {
                     MainMenu.showMenu();
                     break;
                 case 6:
-                    System.out.println("GO HOME BABY");
+                    System.out.println("Application was terminated");
                     return;
             }
         }
